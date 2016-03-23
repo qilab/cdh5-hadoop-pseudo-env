@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+HOST = "192.168.33.50"
+VM_BOX = "bento/centos-6.7"
+ANSIBLE_IS_INSTALLED = false
+
+Vagrant.require_version ">= 1.7.0"
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = VM_BOX
+
+  config.vm.network "private_network", ip: HOST
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 8192
+    v.cpus = 2
+    # for DNS
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  end
+
+  config.vm.synced_folder "../", "/cdh5-hadoop-pseudo-env", mount_options: ['dmode=775', 'fmode=664']
+
+  config.ssh.insert_key = false
+
+  if ANSIBLE_IS_INSTALLED
+    config.vm.provision "ansible" do |ansible|
+      ansible.verbose = "v"
+      ansible.playbook = "../ansible/site.yml"
+      ansible.inventory_path = "../ansible/hosts"
+      ansible.limit = "cdh5-pseudo"
+    end
+  else
+    config.vm.provision "shell" do |sh|
+      sh.path = "provision.sh"
+      sh.privileged = true
+    end
+  end
+
+end
