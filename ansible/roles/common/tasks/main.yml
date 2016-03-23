@@ -10,7 +10,6 @@
   with_items:
     - sudo
     - gcc
-    - kernel-devel
     - perl
     - tcl
     - make
