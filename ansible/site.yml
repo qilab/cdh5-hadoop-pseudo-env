@@ -1,0 +1,8 @@
+---
+- hosts: cdh5-pseudo
+  remote_user: vagrant
+  become: yes
+  roles:
+    - common
+  tags:
+    - common

@@ -1,0 +1,21 @@
+---
+- name: display ansible_distribution, ansible_distribution_major_version, ansible_distribution_version
+  debug: msg="ansible_distribution is {{ ansible_distribution }}, ansible_distribution_major_version is {{ ansible_distribution_major_version }}, ansible_distribution_version is {{ ansible_distribution_version }}"
+
+- name: include OS settings
+  include: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+
+- name: install dependency modules
+  package: name={{ item }} state=present
+  with_items:
+    - sudo
+    - gcc
+    - kernel-devel
+    - perl
+    - tcl
+    - make
+    - wget
+    - tar
+    - ruby
+    - git
+    - vim

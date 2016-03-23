@@ -1,0 +1,34 @@
+---
+- name: stop iptables
+  service: name=iptables state=stopped enabled=no
+  ignore_errors: yes
+
+- name: stop ip6tables
+  service: name=ip6tables state=stopped enabled=no
+  ignore_errors: yes
+
+- name: install libselinux-python
+  yum: name=libselinux-python state=present
+
+- name: check SELinux status
+  command: getenforce
+  register: selinux_result
+
+- name: disable SELinux
+  selinux: state=disabled
+  when: selinux_result.stdout != "Disabled"
+
+- name: install dependency modules
+  yum: name={{ item }} state=present
+  with_items:
+    - sudo
+    - gcc
+    - kernel-devel
+    - perl
+    - tcl
+    - make
+    - wget
+    - tar
+    - ruby
+    - git
+    - vim
