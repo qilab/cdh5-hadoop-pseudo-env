@@ -1,2 +1,5 @@
 # cdh5-hadoop-pseudo-env
-Ansible tasks that builds Hadoop Pseudo-distributed Mode based on CDH5.
+
+[![Circle CI](https://circleci.com/gh/qilab-/cdh5-hadoop-pseudo-env/tree/master.svg?style=svg)](https://circleci.com/gh/qilab-/cdh5-hadoop-pseudo-env/tree/master)
+
+Ansible tasks that build Hadoop Pseudo-distributed Mode based on CDH5.
