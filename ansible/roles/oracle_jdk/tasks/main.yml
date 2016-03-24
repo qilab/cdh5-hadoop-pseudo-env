@@ -1,0 +1,31 @@
+---
+- name: check java_home directory
+  stat: path={{ java_home }}
+  register: java_home_check
+
+- name: check jdk_archive file
+  stat: path={{ jdk_archive }}
+  register: jdk_archive_check
+
+- name: remove jdk_archive if it exists and it is empty
+  file: state=absent path={{ jdk_archive }}
+  when: jdk_archive_check.stat.exists and java_home_check.stat.size == 0
+
+- name: download Java
+  command: "wget -q -O {{ jdk_archive }} --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{ jdk_tarball_url }} creates={{ jdk_archive }}"
+  when: java_home_check.stat.exists == False
+
+- name: unpack archive
+  unarchive: src={{ jdk_archive }} dest={{ jdk_download_folder }} copy=no creates={{ java_home }} owner=root group=root
+
+- name: fix ownership
+  file: state=directory path={{ java_home }} owner=root group=root recurse=yes
+
+- name: make Java available for system
+  command: update-alternatives --install /usr/bin/java java {{ java_home }}/bin/java 18000
+
+- name: run update-alternatives to set the installed java
+  command: update-alternatives --set java {{ java_home }}/bin/java
+
+- name: clean up
+  file: state=absent path={{ jdk_archive }}

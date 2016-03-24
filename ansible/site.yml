@@ -1,8 +1,14 @@
 ---
 - hosts: cdh5-pseudo
-  remote_user: vagrant
   become: yes
   roles:
     - common
   tags:
     - common
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
+    - oracle_jdk
+  tags:
+    - oracle_jdk
