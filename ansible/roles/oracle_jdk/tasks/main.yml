@@ -16,7 +16,7 @@
   when: java_home_check.stat.exists == False
 
 - name: unpack archive
-  unarchive: src={{ jdk_archive }} dest={{ jdk_download_folder }} copy=no creates={{ java_home }} owner=root group=root
+  unarchive: src={{ jdk_archive }} dest={{ java_install_dir }} copy=no creates={{ java_home }} owner=root group=root
 
 - name: fix ownership
   file: state=directory path={{ java_home }} owner=root group=root recurse=yes
