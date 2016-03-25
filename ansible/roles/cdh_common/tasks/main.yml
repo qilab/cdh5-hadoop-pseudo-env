@@ -1,0 +1,4 @@
+---
+- name: set CDH5 repository for RedHat
+  include: RedHat.yml
+  when: ansible_os_family == "RedHat"

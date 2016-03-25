@@ -12,3 +12,10 @@
     - oracle_jdk
   tags:
     - oracle_jdk
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
+    - cdh_common
+  tags:
+    - hadoop
