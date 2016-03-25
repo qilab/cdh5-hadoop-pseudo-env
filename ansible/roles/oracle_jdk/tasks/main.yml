@@ -27,5 +27,11 @@
 - name: run update-alternatives to set the installed java
   command: update-alternatives --set java {{ java_home }}/bin/java
 
+- name: make Javac available for system
+  command: update-alternatives --install /usr/bin/javac javac {{ java_home }}/bin/javac 18000
+
+- name: run update-alternatives to set the installed javac
+  command: update-alternatives --set javac {{ java_home }}/bin/javac
+
 - name: clean up
   file: state=absent path={{ jdk_archive }}
