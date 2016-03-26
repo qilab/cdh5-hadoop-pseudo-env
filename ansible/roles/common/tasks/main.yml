@@ -4,6 +4,7 @@
 
 - name: include OS settings
   include: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+  ignore_errors: yes
 
 - name: install dependency modules
   package: name={{ item }} state=present

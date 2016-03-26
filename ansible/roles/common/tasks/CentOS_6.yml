@@ -13,22 +13,9 @@
 - name: check SELinux status
   command: getenforce
   register: selinux_result
+  ignore_errors: yes
 
 - name: disable SELinux
   selinux: state=disabled
   when: selinux_result.stdout != "Disabled"
-
-- name: install dependency modules
-  yum: name={{ item }} state=present
-  with_items:
-    - sudo
-    - gcc
-    - kernel-devel
-    - perl
-    - tcl
-    - make
-    - wget
-    - tar
-    - ruby
-    - git
-    - vim
+  ignore_errors: yes

@@ -19,18 +19,3 @@
   selinux: state=disabled
   when: selinux_result.stdout != "Disabled"
   ignore_errors: yes
-
-- name: install dependency modules
-  yum: name={{ item }} state=present
-  with_items:
-    - sudo
-    - gcc
-    - kernel-devel
-    - perl
-    - tcl
-    - make
-    - wget
-    - tar
-    - ruby
-    - git
-    - vim
