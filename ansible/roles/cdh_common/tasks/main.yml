@@ -2,3 +2,7 @@
 - name: set CDH5 repository for RedHat
   include: RedHat.yml
   when: ansible_os_family == "RedHat"
+
+- name: set CDH5 repository for Ubuntu
+  include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
