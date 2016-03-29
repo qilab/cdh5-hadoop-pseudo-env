@@ -2,6 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
+
   <property>
     <name>fs.defaultFS</name>
     <value>hdfs://localhost:8020</value>
@@ -24,6 +25,36 @@
   </property>
   <property>
     <name>hadoop.proxyuser.httpfs.groups</name>
+    <value>*</value>
+  </property>
+
+  <!-- Llama proxy user setting -->
+  <property>
+    <name>hadoop.proxyuser.llama.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.llama.groups</name>
+    <value>*</value>
+  </property>
+
+  <!-- Hue proxy user setting -->
+  <property>
+    <name>hadoop.proxyuser.hue.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hue.groups</name>
+    <value>*</value>
+  </property>
+
+  <!-- Mapred proxy user setting -->
+  <property>
+    <name>hadoop.proxyuser.mapred.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.mapred.groups</name>
     <value>*</value>
   </property>
 

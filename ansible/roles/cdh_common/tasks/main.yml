@@ -11,22 +11,41 @@
   command: cp -R -p /etc/hadoop/conf.pseudo /etc/hadoop/conf.mycluster creates=/etc/hadoop/conf.mycluster
 
 - name: configure Hadoop in /etc/hadoop/conf.mycluster
-  template: src={{ item }}.j2 dest=/etc/hadoop/conf.mycluster/{{ item }} owner=root group=root mode=0644
+  template: src={{ item }}.j2 dest=/etc/hadoop/conf.mycluster/{{ item }} owner=root group=root mode=0755
   with_items:
     - core-site.xml
     - hdfs-site.xml
     - mapred-site.xml
     - yarn-site.xml
     - hadoop-env.sh
-    - topology.data
-
-- name: put topology.sh in /etc/hadoop/conf.mycluster (it must be executable)
-  template: src={{ item }}.j2 dest=/etc/hadoop/conf.mycluster/{{ item }} owner=root group=root mode=0755
-  with_items:
     - topology.sh
+    - topology.data
 
 - name: run update-alternatives to install hadoop configuration
   command: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.mycluster 50
 
 - name: run update-alternatives to set hadoop configuration
   command: update-alternatives --set hadoop-conf /etc/hadoop/conf.mycluster
+
+- name: format the NameNode
+  become: yes
+  become_method: sudo
+  become_user: hdfs
+  command: hdfs namenode -format
+
+- name: start HDFS
+  service: name={{ item }} state=started
+  with_items:
+    - hadoop-hdfs-datanode
+    - hadoop-hdfs-namenode
+    - hadoop-hdfs-secondarynamenode
+
+- name: create the directories needed for Hadoop processes
+  shell: /usr/lib/hadoop/libexec/init-hdfs.sh
+
+- name: start YARN
+  service: name={{ item }} state=started
+  with_items:
+    - hadoop-yarn-resourcemanager
+    - hadoop-yarn-nodemanager
+    - hadoop-mapreduce-historyserver

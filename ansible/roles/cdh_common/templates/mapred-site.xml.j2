@@ -4,6 +4,11 @@
 <configuration>
 
   <property>
+    <name>mapred.job.tracker</name>
+    <value>localhost:8021</value>
+  </property>
+
+  <property>
     <name>mapreduce.framework.name</name>
     <value>yarn</value>
   </property>
@@ -21,6 +26,12 @@
   <property>
     <name>yarn.app.mapreduce.am.staging-dir</name>
     <value>/tmp/hadoop-yarn/staging</value>
+  </property>
+
+  <property>
+    <description>To set the value of tmp directory for map and reduce tasks.</description>
+    <name>mapreduce.task.tmp.dir</name>
+    <value>/var/lib/hadoop-mapreduce/cache/${user.name}/tasks</value>
   </property>
 
 </configuration>
