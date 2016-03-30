@@ -14,13 +14,11 @@ if [ ! -f $ANSIBLE_HOSTS ]; then
   exit 2
 fi
 
-if ! [ `which ansible` ]; then
-  yum install -y epel-release
-  yum install -y sshpass
-  yum install -y gcc
-  yum install -y python-pip python-tools python-devel
-  pip install ansible
-fi
+yum install -y epel-release
+yum install -y sshpass
+yum install -y gcc
+yum install -y python-pip python-tools python-devel
+pip install ansible
 
 cp $ANSIBLE_HOSTS $ANSIBLE_HOSTS_TMP
 chmod -x $ANSIBLE_HOSTS_TMP
