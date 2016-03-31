@@ -1,0 +1,11 @@
+java_version: 8
+java_subversion: 77
+java_subsubversion: "03"
+java_home: /opt/java/default
+java_install_dir: /opt/java
+java_unarchive_dir: "{{ java_install_dir }}/jdk1.{{ java_version }}.0_{{ java_subversion }}"
+
+jdk_tarball_file: "jdk-{{ java_version }}u{{ java_subversion }}-linux-x64.tar.gz"
+jdk_tarball_url: "http://download.oracle.com/otn-pub/java/jdk/{{ java_version }}u{{ java_subversion }}-b{{ java_subsubversion }}/{{ jdk_tarball_file }}"
+jdk_download_dir: /tmp
+jdk_archive: "{{ jdk_download_dir }}/{{ jdk_tarball_file }}"

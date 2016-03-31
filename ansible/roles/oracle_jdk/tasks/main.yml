@@ -1,6 +1,6 @@
 ---
 - name: check java_home directory
-  stat: path={{ java_home }}
+  stat: path={{ java_unarchive_dir }}
   register: java_home_check
 
 - name: check jdk_archive file
@@ -15,11 +15,14 @@
   command: "wget -q -O {{ jdk_archive }} --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{ jdk_tarball_url }} creates={{ jdk_archive }}"
   when: java_home_check.stat.exists == False
 
-- name: unpack archive
-  unarchive: src={{ jdk_archive }} dest={{ java_install_dir }} copy=no creates={{ java_home }} owner=root group=root
+- name: create java_install_dir if not exists
+  file: path={{ java_install_dir }} state=directory owner=root group=root mode=0755
 
-- name: fix ownership
-  file: state=directory path={{ java_home }} owner=root group=root recurse=yes
+- name: unpack archive
+  unarchive: src={{ jdk_archive }} dest={{ java_install_dir }} copy=no creates={{ java_unarchive_dir }} owner=root group=root
+
+- name: link java_home
+  file: path={{ java_home }} src={{ java_unarchive_dir }} state=link
 
 - name: make Java available for system
   command: update-alternatives --install /usr/bin/java java {{ java_home }}/bin/java 18000
