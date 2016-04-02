@@ -1,3 +1,6 @@
 ---
 cdh_subversion: 6
 cdh_subsubversion: 0
+
+hadoop_tmp_dir_base: /var/lib/hadoop-hdfs/cache
+dfs_name_dir: /dfs/name

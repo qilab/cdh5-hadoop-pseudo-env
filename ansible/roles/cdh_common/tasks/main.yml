@@ -31,7 +31,7 @@
   become: yes
   become_method: sudo
   become_user: hdfs
-  command: hdfs namenode -format
+  command: hdfs namenode -format creates={{ hadoop_tmp_dir_base }}/hdfs{{ dfs_name_dir }}
 
 - name: start HDFS
   service: name={{ item }} state=started

@@ -19,11 +19,11 @@
   </property>
   <property>
      <name>hadoop.tmp.dir</name>
-     <value>/var/lib/hadoop-hdfs/cache/${user.name}</value>
+     <value>{{ hadoop_tmp_dir_base }}/${user.name}</value>
   </property>
   <property>
      <name>dfs.namenode.name.dir</name>
-     <value>file:///var/lib/hadoop-hdfs/cache/${user.name}/dfs/name</value>
+     <value>file://${hadoop.tmp.dir}{{ dfs_name_dir }}</value>
   </property>
   <property>
      <name>dfs.namenode.checkpoint.dir</name>
