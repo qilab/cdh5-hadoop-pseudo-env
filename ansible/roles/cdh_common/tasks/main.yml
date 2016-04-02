@@ -40,8 +40,14 @@
     - hadoop-hdfs-namenode
     - hadoop-hdfs-secondarynamenode
 
+- name: check whether /tmp directory exists on HDFS
+  command: hadoop fs -test -e /tmp
+  register: check_existence_of_directories
+  ignore_errors: yes
+
 - name: create the directories needed for Hadoop processes
   shell: /usr/lib/hadoop/libexec/init-hdfs.sh
+  when: check_existence_of_directories.rc != 0
 
 - name: start YARN
   service: name={{ item }} state=started
