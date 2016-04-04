@@ -6,7 +6,7 @@ VM_BOX = "bento/centos-7.2"
 #VM_BOX = "bento/centos-6.7"
 #VM_BOX = "bento/ubuntu-12.04"
 #VM_BOX = "bento/ubuntu-14.04"
-ANSIBLE_IS_INSTALLED = false
+ANSIBLE_IS_INSTALLED = true
 
 Vagrant.require_version ">= 1.7.0"
 
