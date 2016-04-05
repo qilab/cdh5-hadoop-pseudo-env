@@ -19,3 +19,10 @@
     - cdh_common
   tags:
     - hadoop
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
+    - zookeeper
+  tags:
+    - zookeeper
