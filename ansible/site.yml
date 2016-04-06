@@ -26,3 +26,10 @@
     - zookeeper
   tags:
     - zookeeper
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
+    - hbase
+  tags:
+    - hbase
