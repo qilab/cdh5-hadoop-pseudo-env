@@ -23,4 +23,4 @@ pip install ansible
 cp $ANSIBLE_HOSTS $ANSIBLE_HOSTS_TMP
 chmod -x $ANSIBLE_HOSTS_TMP
 echo "Running Ansible"
-ansible-playbook -i $ANSIBLE_HOSTS_TMP $ANSIBLE_PLAYBOOK --extra-vars "test=yes" -v --connection=local
+ansible-playbook -i $ANSIBLE_HOSTS_TMP $ANSIBLE_PLAYBOOK --extra-vars "not_start_hbase=yes" -v --connection=local

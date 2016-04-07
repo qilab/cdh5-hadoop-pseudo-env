@@ -45,3 +45,4 @@
   with_items:
     - hbase-master
     - hbase-regionserver
+  when: not_start_hbase is undefined or not not_start_hbase
