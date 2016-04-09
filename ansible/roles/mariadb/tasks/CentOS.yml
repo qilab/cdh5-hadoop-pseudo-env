@@ -1,0 +1,10 @@
+---
+- name: set MariaDB on yum repository
+  template: src=mariadb.repo.j2 dest=/etc/yum.repos.d/mariadb.repo owner=root group=root mode=0644
+
+- name: install MariaDB-server, MariaDB-client and MySQL-python
+  yum: name={{ item }} state=present update_cache=yes
+  with_items:
+    - MariaDB-server
+    - MariaDB-client
+    - MySQL-python
