@@ -1,0 +1,17 @@
+---
+- name: download mysql-connector-java
+  get_url:
+    url={{ mysql_connector_java_tarball_url }}
+    dest={{ mysql_connector_java_archive }}
+
+- name: create {{ mysql_connector_java_install_dir }}
+  file: path={{ mysql_connector_java_install_dir }} state=directory owner=root group=root mode=0755
+
+- name: unpack archive
+  unarchive: src={{ mysql_connector_java_archive }} dest={{ mysql_connector_java_install_dir }} copy=no creates={{ mysql_connector_java_unarchive_dir }} owner=root group=root
+
+- name: link {{ mysql_connector_java_home }}
+  file: path={{ mysql_connector_java_home }} src={{ mysql_connector_java_unarchive_dir }} state=link
+
+- name: link {{ mysql_connector_java_jar }}
+  file: path={{ mysql_connector_java_jar }} src={{ mysql_connector_java_jar_with_ver }} state=link

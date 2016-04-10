@@ -40,3 +40,10 @@
     - mariadb
   tags:
     - mariadb
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
+    - mysql_connector_java
+  tags:
+    - mysql_connector_java

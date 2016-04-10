@@ -1,0 +1,11 @@
+---
+mysql_connector_java_version: "5.1.38"
+mysql_connector_java_tarball_file: mysql-connector-java-{{ mysql_connector_java_version }}.tar.gz
+mysql_connector_java_tarball_url: http://cdn.mysql.com/Downloads/Connector-J/{{ mysql_connector_java_tarball_file }}
+mysql_connector_java_download_dir: /tmp
+mysql_connector_java_install_dir: /opt/mysql-connector-java
+mysql_connector_java_archive: "{{ mysql_connector_java_download_dir }}/{{ mysql_connector_java_tarball_file }}"
+mysql_connector_java_unarchive_dir: "{{ mysql_connector_java_install_dir }}/mysql-connector-java-{{ mysql_connector_java_version }}"
+mysql_connector_java_home: "{{ mysql_connector_java_install_dir }}/default"
+mysql_connector_java_jar_with_ver: "{{ mysql_connector_java_home }}/mysql-connector-java-{{ mysql_connector_java_version }}-bin.jar"
+mysql_connector_java_jar: "{{ mysql_connector_java_home }}/mysql-connector-java.jar"
