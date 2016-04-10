@@ -1,0 +1,48 @@
+---
+- name: install hive
+  package: name={{ item }} state=present
+  with_items:
+    - hive
+    - hive-server2
+    - hive-metastore
+
+- name: make symbolic link
+  file: src={{ mysql_connector_java_jar }} dest=/usr/lib/hive/lib/mysql-connector-java.jar state=link
+
+- name: create MariaDB database for Hive metastore
+  mysql_db:
+    name: hive
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    state: present
+
+- name: create hive user on MySQL
+  mysql_user:
+    name: hive
+    host: localhost
+    password: hive
+    priv: "hive.*:ALL"
+    state: present
+
+- name: copy /etc/hive/conf.dist to /etc/hive/conf.mycluster
+  command: cp -R -p /etc/hive/conf.dist /etc/hive/conf.mycluster creates=/etc/hive/conf.mycluster
+
+- name: configre Hive
+  template: src={{ item }}.j2 dest=/etc/hive/conf.mycluster/{{ item }} group=hive owner=hive mode=0644
+  with_items:
+    - hive-site.xml
+
+- name: run update-alternatives to install hive configuration
+  command: update-alternatives --install /etc/hive/conf hive-conf /etc/hive/conf.mycluster 50
+
+- name: run update-alternatives to set hive configuration
+  command: update-alternatives --set hive-conf /etc/hive/conf.mycluster
+
+- name: configure hive-server2
+  template: src=hive-server2.j2 dest=/etc/default/hive-server2 group=root owner=root mode=0644
+
+- name: restart hive-server2 and hive-metastore
+  service: name={{ item }} state=restarted enabled=yes
+  with_items:
+    - hive-metastore
+    - hive-server2

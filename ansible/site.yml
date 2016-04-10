@@ -47,3 +47,10 @@
     - mysql_connector_java
   tags:
     - mysql_connector_java
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
+    - hive
+  tags:
+    - hive
