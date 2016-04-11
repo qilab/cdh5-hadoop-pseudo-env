@@ -1,6 +1,9 @@
 ---
-- name: install ZooKeeper Server
-  package: name=zookeeper-server state=present
+- name: install ZooKeeper
+  package: name={{ item }} state=present
+  with_items:
+    - zookeeper
+    - zookeeper-server
 
 - name: create data directory
   file: path={{ zookeeper_data_dir }} owner=zookeeper group=zookeeper state=directory
@@ -20,5 +23,5 @@
 - name: initialize ZooKeeper
   command: creates={{ zookeeper_data_dir }}/myid service zookeeper-server init --myid={{ zookeeper_id }}
 
-- name: start zookeeper
-  service: name=zookeeper-server state=started
+- name: restart zookeeper
+  service: name=zookeeper-server state=restarted
