@@ -1,0 +1,15 @@
+---
+- name: import the signing key
+  apt_key: keyserver=pgp.mit.edu id=5072E1F5
+
+- name: set MySQL on apt repository
+  template: src=mysql.list.j2 dest=/etc/apt/sources.list.d/mysql.list owner=root group=root mode=0644
+
+- name: install mysql-server and python-mysqldb
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - mysql-server
+    - python-mysqldb
+
+- name: start mysql
+  service: name=mysql state=restarted enabled=yes

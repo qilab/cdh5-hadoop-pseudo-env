@@ -1,0 +1,6 @@
+---
+mysql_major_version: "5"
+mysql_subversion: "7"
+mysql_version: "{{ mysql_major_version }}.{{ mysql_subversion }}"
+mysql_rpm_version: "8"
+mysql_root_password: root

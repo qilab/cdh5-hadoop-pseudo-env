@@ -1,0 +1,15 @@
+---
+- name: add MySQL yum repository
+  yum: name=http://dev.mysql.com/get/mysql{{ mysql_major_version }}{{ mysql_subversion }}-community-release-el{{ ansible_distribution_major_version }}-{{ mysql_rpm_version }}.noarch.rpm state=present
+
+- name: set MySQL on yum repository
+  template: src=mysql-community.repo.j2 dest=/etc/yum.repos.d/mysql-community.repo owner=root group=root mode=0644
+
+- name: install mysql-community-server and MySQL-python
+  yum: name={{ item }} state=present update_cache=yes
+  with_items:
+    - mysql-community-server
+    - MySQL-python
+
+- name: restart mysqld
+  service: name=mysqld state=restarted enabled=yes

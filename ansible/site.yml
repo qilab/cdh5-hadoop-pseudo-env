@@ -34,12 +34,19 @@
   tags:
     - hbase
 
+#- hosts: cdh5-pseudo
+#  become: yes
+#  roles:
+#    - mariadb
+#  tags:
+#    - mariadb
+
 - hosts: cdh5-pseudo
   become: yes
   roles:
-    - mariadb
+    - mysql
   tags:
-    - mariadb
+    - mysql
 
 - hosts: cdh5-pseudo
   become: yes
