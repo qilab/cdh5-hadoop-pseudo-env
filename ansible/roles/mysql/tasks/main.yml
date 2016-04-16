@@ -2,11 +2,11 @@
 - name: set MySQL repository for {{ ansible_distribution }}
   include: "{{ ansible_distribution }}.yml"
 
+- name: put .my.cnf
+  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root mode=0600
+
 - name: set root password
   mysql_user:
     name: root
     host: localhost
     password: "{{ mysql_root_password }}"
-
-- name: put .my.cnf
-  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root mode=0600
