@@ -1,0 +1,4 @@
+---
+hadoop_tmp_dir_base: /var/lib/hadoop-hdfs/cache
+dfs_name_dir: /dfs/name
+java_home: /opt/java/default

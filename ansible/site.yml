@@ -23,6 +23,13 @@
 - hosts: cdh5-pseudo
   become: yes
   roles:
+    - hadoop
+  tags:
+    - hadoop
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
     - zookeeper
   tags:
     - zookeeper

@@ -2,15 +2,5 @@
 - name: set Cloudera on yum repository
   template: src=cloudera-cdh5.repo.j2 dest=/etc/yum.repos.d/cloudera-cdh5.repo owner=root group=root mode=0644
 
-# optional
-- name: add the Cloudera Public GPG Key
+- name: add the Cloudera Public GPG Key (optional)
   rpm_key: state=present key=http://archive.cloudera.com/cdh5/redhat/{{ ansible_distribution_major_version }}/x86_64/cdh/RPM-GPG-KEY-cloudera
-
-- name: yum clean all
-  command: yum clean all
-
-- name: install pseudo yarn
-  yum: name=hadoop-conf-pseudo state=present
-
-- name: view the files on Red Hat systems
-  command: rpm -ql hadoop-conf-pseudo

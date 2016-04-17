@@ -6,15 +6,5 @@
   template: src=cloudera.pref.j2 dest=/etc/apt/preferences.d/cloudera.pref owner=root group=root mode=0644
   when: ansible_distribution_release == "trusty"
 
-# optional
-- name: add the Cloudera Repository Key
+- name: add the Cloudera Repository Key (optional)
   apt_key: state=present url=https://archive.cloudera.com/cdh5/ubuntu/{{ ansible_distribution_release }}/amd64/cdh/archive.key
-
-- name: apt-get update
-  command: apt-get update
-
-- name: install hadoop pseudo yarn
-  apt: name=hadoop-conf-pseudo state=present
-
-- name: view the files on Ubuntu systems
-  command: dpkg -L hadoop-conf-pseudo
