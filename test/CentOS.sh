@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ANSIBLE_PLAYBOOK=/test_ansible/ansible/site.yml
-ANSIBLE_HOSTS=/test_ansible/ansible/hosts
+ANSIBLE_PLAYBOOK=/cdh5-hadoop-pseudo-env/ansible/site.yml
+ANSIBLE_HOSTS=/cdh5-hadoop-pseudo-env/ansible/hosts
 ANSIBLE_HOSTS_TMP=/tmp/ansible_hosts
 
 if [ ! -f $ANSIBLE_PLAYBOOK ]; then
@@ -23,4 +23,4 @@ pip install ansible
 cp $ANSIBLE_HOSTS $ANSIBLE_HOSTS_TMP
 chmod -x $ANSIBLE_HOSTS_TMP
 echo "Running Ansible"
-ansible-playbook -i $ANSIBLE_HOSTS_TMP $ANSIBLE_PLAYBOOK --extra-vars "not_start_hbase=yes" -v --connection=local
+ansible-playbook -i $ANSIBLE_HOSTS_TMP $ANSIBLE_PLAYBOOK --extra-vars "not_start_hbase=yes" --connection=local
