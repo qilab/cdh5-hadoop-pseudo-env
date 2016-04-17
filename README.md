@@ -11,6 +11,7 @@ The Ansible playbook in [ansible](./ansible) consists of following roles:
 
 * [`cdh_common`](./ansible/roles/cdh_common/): sets up Cloudera's repository and key
 * [`common`](./ansible/roles/common/): sets up OS settings and install common packages
+* [`hadoop`](./ansible/roles/hadoop/): installs Hadoop
 * [`hbase`](./ansible/roles/hbase/): installs HBase
 * [`hive`](./ansible/roles/hive/): installs Hive (it requires Metastore DB is installed)
 * [`mariadb`](./ansible/roles/mariadb/): installs MariaDB for Hive Metastore
