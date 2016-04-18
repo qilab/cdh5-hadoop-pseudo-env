@@ -14,15 +14,12 @@ if [ ! -f $ANSIBLE_HOSTS ]; then
   exit 2
 fi
 
-if ! [ `which ansible` ]; then
-  yum install -y epel-release
-  yum install -y sshpass
-  yum install -y gcc
-  yum install -y python-pip python-tools python-devel
-  pip install ansible
-fi
+apt-get -y install python-software-properties
+apt-add-repository -y ppa:ansible/ansible
+apt-get -y update
+apt-get -y install ansible
 
 cp $ANSIBLE_HOSTS $ANSIBLE_HOSTS_TMP
 chmod -x $ANSIBLE_HOSTS_TMP
 echo "Running Ansible"
-ansible-playbook -i $ANSIBLE_HOSTS_TMP $ANSIBLE_PLAYBOOK -v --connection=local
+ansible-playbook -i $ANSIBLE_HOSTS_TMP $ANSIBLE_PLAYBOOK --connection=local
