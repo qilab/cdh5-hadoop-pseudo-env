@@ -38,3 +38,14 @@ You can use the Vagrantfile in [vagrant](./vagrant) to create an Hadoop environm
 
 * [VirtualBox](https://www.virtualbox.org/) 5.0.0 or later
 * [Vagrant](https://www.vagrantup.com/) 1.7.0 or later
+
+### Usage
+
+Change directory `cd ./vagrant` and run `vagrant up`.
+As default, CentOS 7.2 and all provision is run.
+
+additional settings:
+If ansible is installed in your host OS, the provision is run by using it.
+If ansible is not installed in your host OS,
+you should set the parameter `ANSIBLE_IS_INSTALLED` to be `false` and choose proper shell script file as `PROVISION_SHELL` in Vagrantfile.
+Then(?), when you run `vagrant up` ansible will be installed in the guest OS and provision will be run using it.
