@@ -15,7 +15,7 @@ dependencies:
 test:
   override:
     - ansible-playbook --syntax-check -i ansible/hosts ansible/site.yml
-    - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env centos:6.7 sh /cdh5-hadoop-pseudo-env/test/CentOS.sh
-    - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env centos:7.2.1511 sh /cdh5-hadoop-pseudo-env/test/CentOS.sh
-    - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu:precise sh /cdh5-hadoop-pseudo-env/test/Ubuntu_12.sh
-    - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu:trusty sh /cdh5-hadoop-pseudo-env/test/Ubuntu_14.sh
+    #- docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env centos:6.7 sh /cdh5-hadoop-pseudo-env/test/CentOS.sh
+    #- docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env centos:7.2.1511 sh /cdh5-hadoop-pseudo-env/test/CentOS.sh
+    #- docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu:precise sh /cdh5-hadoop-pseudo-env/test/Ubuntu_12.sh
+    #- docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu:trusty sh /cdh5-hadoop-pseudo-env/test/Ubuntu_14.sh
