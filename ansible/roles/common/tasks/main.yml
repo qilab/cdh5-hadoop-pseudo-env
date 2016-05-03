@@ -8,11 +8,8 @@
   with_items:
     - sudo
     - gcc
-    - perl
-    - tcl
     - make
     - wget
     - tar
-    - ruby
     - git
     - vim
