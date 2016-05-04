@@ -13,11 +13,13 @@ dependencies:
     - docker version
     - docker build -f test/Dockerfile-centos6.7 -t centos6.7 .
     - docker build -f test/Dockerfile-centos7.2 -t centos7.2 .
+    - docker build -f test/Dockerfile-ubuntu12.04 -t ubuntu12.04 .
+    - docker build -f test/Dockerfile-ubuntu14.04 -t ubuntu14.04 .
 
 test:
   override:
     - ansible-playbook --syntax-check -i ansible/hosts ansible/site.yml
     - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env centos6.7 ansible-playbook -i /cdh5-hadoop-pseudo-env/ansible/hosts /cdh5-hadoop-pseudo-env/ansible/site.yml --extra-vars "not_start_hbase=yes" --connection=local
     - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env centos7.2 ansible-playbook -i /cdh5-hadoop-pseudo-env/ansible/hosts /cdh5-hadoop-pseudo-env/ansible/site.yml --extra-vars "not_start_hbase=yes" --connection=local
-    #- docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu:precise sh /cdh5-hadoop-pseudo-env/test/Ubuntu_12.sh
-    #- docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu:trusty sh /cdh5-hadoop-pseudo-env/test/Ubuntu_14.sh
+    - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu12.04 ansible-playbook -i /cdh5-hadoop-pseudo-env/ansible/hosts /cdh5-hadoop-pseudo-env/ansible/site.yml --connection=local
+    - docker run --privileged -it -v `pwd`:/cdh5-hadoop-pseudo-env ubuntu14.04 ansible-playbook -i /cdh5-hadoop-pseudo-env/ansible/hosts /cdh5-hadoop-pseudo-env/ansible/site.yml --connection=local
