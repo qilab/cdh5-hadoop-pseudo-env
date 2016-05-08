@@ -1,0 +1,68 @@
+---
+- name: check whether {{ spark_event_log_dir_base }} directory exists in HDFS
+  command: hadoop fs -test -e {{ spark_event_log_dir_base }}
+  register: check_existence_of_spark_event_log_dir_base_directory
+  ignore_errors: yes
+
+- name: check whether {{ spark_event_log_dir }} directory exists in HDFS
+  command: hadoop fs -test -e {{ spark_event_log_dir }}
+  register: check_existence_of_spark_event_log_dir_directory
+  ignore_errors: yes
+
+- name: create {{ spark_event_log_dir_base }} directory in HDFS
+  become: yes
+  become_user: hdfs
+  become_method: sudo
+  command: hadoop fs -mkdir -p {{ spark_event_log_dir_base }}
+  when: check_existence_of_spark_event_log_dir_base_directory.rc != 0
+
+- name: chown {{ spark_event_log_dir_base }} directory in HDFS
+  become: yes
+  become_user: hdfs
+  become_method: sudo
+  command: hadoop fs -chown -R spark:spark {{ spark_event_log_dir_base }}
+
+- name: create {{ spark_event_log_dir }} directory in HDFS
+  become: yes
+  become_user: hdfs
+  become_method: sudo
+  command: hadoop fs -mkdir -p {{ spark_event_log_dir }}
+  when: check_existence_of_spark_event_log_dir_directory.rc != 0
+
+- name: chmod {{ spark_event_log_dir }} directory in HDFS
+  become: yes
+  become_user: hdfs
+  become_method: sudo
+  command: hadoop fs -chmod 1777 {{ spark_event_log_dir }}
+
+- name: install Spark
+  package: name={{ item }} state=present update_cache=yes
+  with_items:
+    - spark-core
+    #- spark-master
+    #- spark-worker
+    - spark-history-server
+    - spark-python
+
+- name: copy /etc/spark/conf.dist to /etc/spark/conf.mycluster
+  command: cp -R -p /etc/spark/conf.dist /etc/spark/conf.mycluster creates=/etc/spark/conf.mycluster
+
+- name: configure Spark in /etc/spark/conf.mycluster
+  template: src={{ item }}.j2 dest=/etc/spark/conf.mycluster/{{ item }} owner=root group=root mode=0755
+  with_items:
+    - slaves
+    - spark-defaults.conf
+    - spark-env.sh
+
+- name: run update-alternatives to install spark configuration
+  command: update-alternatives --install /etc/spark/conf spark-conf /etc/spark/conf.mycluster 50
+
+- name: run update-alternatives to set spark configuration
+  command: update-alternatives --set spark-conf /etc/spark/conf.mycluster
+
+- name: restart spark
+  service: name={{ item }} state=restarted
+  with_items:
+    #- spark-master
+    #- spark-worker
+    - spark-history-server

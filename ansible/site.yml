@@ -61,3 +61,10 @@
     - hive
   tags:
     - hive
+
+- hosts: cdh5-pseudo
+  become: yes
+  roles:
+    - spark
+  tags:
+    - spark
