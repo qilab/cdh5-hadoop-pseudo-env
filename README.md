@@ -2,7 +2,7 @@
 
 [![Circle CI](https://circleci.com/gh/qilab-/cdh5-hadoop-pseudo-env/tree/master.svg?style=svg)](https://circleci.com/gh/qilab-/cdh5-hadoop-pseudo-env/tree/master)
 
-This is an Ansible playbook that installs Hadoop Pseudo-distributed Mode based on CDH 5.x with HBase, Hive, etc.
+This is an Ansible playbook that installs Hadoop Pseudo-distributed Mode based on CDH 5.x with ZooKeeper, HBase, Hive, Spark, etc.
 Vagrantfile (in [vagrant](./vagrant)) that creates an Hadoop environment provisioned by the playbook is available.
 
 ## Ansible playbook ([ansible](./ansible))
@@ -17,6 +17,7 @@ The Ansible playbook in [ansible](./ansible) consists of following roles:
 * [`mariadb`](./ansible/roles/mariadb/): installs MariaDB for Hive Metastore
 * [`mysql_connector_java`](./ansible/roles/mysql_connector_java/): installs MySQL Connector/J for Hive Metastore
 * [`oracle_jdk`](./ansible/roles/oracle_jdk/): installs Oracle JDK
+* [`spark`](./ansible/roles/spark/): installs Spark
 * [`zookeeper`](./ansible/roles/zookeeper/): installs ZooKeeper Server
 
 ### Requirements

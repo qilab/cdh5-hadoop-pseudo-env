@@ -23,9 +23,9 @@ TAGS = [
   "hbase",
   "mariadb",
   "mysql_connector_java",
-  "hive"
+  "hive",
+  "spark"
 ]
-
 
 Vagrant.require_version ">= 1.7.0"
 
