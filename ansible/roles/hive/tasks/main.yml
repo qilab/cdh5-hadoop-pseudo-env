@@ -24,6 +24,9 @@
     priv: "hive.*:ALL"
     state: present
 
+- name: create schema for Hive metastore
+  command: cd /usr/lib/hive/scripts/metastore/upgrade/mysql && mysql -uhive -phive hive < hive-schema-1.1.0.mysql.sql
+
 - name: copy /etc/hive/conf.dist to /etc/hive/conf.mycluster
   command: cp -R -p /etc/hive/conf.dist /etc/hive/conf.mycluster creates=/etc/hive/conf.mycluster
 

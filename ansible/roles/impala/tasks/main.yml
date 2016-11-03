@@ -1,0 +1,22 @@
+---
+- name: install impala
+  package: name={{ item }} state=present
+  with_items:
+    - impala
+    - impala-server
+    - impala-state-store
+    - impala-catalog
+    - impala-shell
+
+- name: config JAVA_HOME in /etc/default/bigtop-utils
+  lineinfile:
+    dest: /etc/default/bigtop-utils
+    regexp: export JAVA_HOME
+    line: export JAVA_HOME={{ java_home }}
+
+- name: restart impala services
+  service: name={{ item }} state=restarted enabled=yes
+  with_items:
+    - impala-server
+    - impala-state-store
+    - impala-catalog

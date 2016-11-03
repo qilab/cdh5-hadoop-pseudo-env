@@ -2,4 +2,4 @@
 mariadb_version: "10.1"
 mariadb_root_password: root
 
-mariadb_mirror_url: http://ftp.yz.yamagata-u.ac.jp/pub/dbms
+mariadb_mirror_url: http://sfo1.mirrors.digitalocean.com
