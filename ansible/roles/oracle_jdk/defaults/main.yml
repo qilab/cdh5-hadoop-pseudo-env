@@ -1,6 +1,6 @@
 java_version: 8
-java_subversion: 77
-java_subsubversion: "03"
+java_subversion: 111
+java_subsubversion: "14"
 java_install_dir: /opt/java
 java_unarchive_dir: "{{ java_install_dir }}/jdk1.{{ java_version }}.0_{{ java_subversion }}"
 java_home: "{{ java_install_dir }}/default"
