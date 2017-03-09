@@ -1,6 +1,6 @@
 # cdh5-hadoop-pseudo-env
 
-[![Circle CI](https://circleci.com/gh/qilab-/cdh5-hadoop-pseudo-env/tree/master.svg?style=svg)](https://circleci.com/gh/qilab-/cdh5-hadoop-pseudo-env/tree/master)
+[![Circle CI](https://circleci.com/gh/qilab/cdh5-hadoop-pseudo-env/tree/master.svg?style=svg)](https://circleci.com/gh/qilab/cdh5-hadoop-pseudo-env/tree/master)
 
 This is an Ansible playbook that installs Hadoop Pseudo-distributed Mode based on CDH 5.x with ZooKeeper, HBase, Hive, Spark, etc.
 Vagrantfile (in [vagrant](./vagrant)) that creates an Hadoop environment provisioned by the playbook is available.
