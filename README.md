@@ -27,7 +27,7 @@ The Ansible playbook in [ansible](./ansible) consists of following roles:
 This playbook is designed for following OS:
 
 * CentOS 6.8
-* CentOS 7.2
+* CentOS 7.3
 * Ubuntu 12.04 (precise)
 * Ubuntu 14.04 (trusty)
 
