@@ -2,19 +2,16 @@ machine:
   services:
     - docker
   python:
-    version: 3.5.1
+    version: 3.5.3
 
 dependencies:
   pre:
     - sudo apt-get update
     - sudo apt-get install software-properties-common
     - sudo apt-get install build-essential libssl-dev libffi-dev python-dev python3-dev
-    - pip install --upgrade pip
-    - pip install ansible
-      #- pip install cryptography
-      #- sudo apt-add-repository ppa:ansible/ansible -y
-      #- sudo apt-get update
-      #- sudo apt-get install ansible
+    - sudo apt-add-repository ppa:ansible/ansible -y
+    - sudo apt-get update
+    - sudo apt-get install ansible
   override:
     - ansible --version
     - docker info
